@@ -1,10 +1,3 @@
-def find(b):
-	for i in range(9):
-		for j in range(9):
-			if b[i][j]==0:
-				return i,j
-	return False
-
 def valid(b, r, c, n):
 	for i in range(9):
 		if b[r][i]==n or b[i][c]==n :
@@ -20,16 +13,14 @@ def valid(b, r, c, n):
 	return True
 
 def solve(b):
-	if not find(b):
-		return True
-	else:
-		r,c = find(b)
-	for i in range(1,10):
-		if valid(b,r,c,i):
-			b[r][c] = i
-			if solve(b):
-				return True
-			
-			
-			b[r][c]=0
-	return False
+	for r in range(9):
+		for c in range(9):
+			if b[r][c]== 0:
+				for i in range(1,10):
+					if valid(b,r,c,i):
+						b[r][c] = i
+						if solve(b):
+							return True
+						b[r][c]=0
+				return False
+	return True
